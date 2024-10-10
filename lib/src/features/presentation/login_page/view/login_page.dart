@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/route.dart';
+import 'package:flutter/services.dart';
 import 'package:myapp/src/features/common_widgets/back_button.dart';
 import 'package:myapp/src/features/common_widgets/my_button.dart';
 import 'package:myapp/src/features/presentation/password_page/view/password_page.dart';
@@ -60,7 +60,7 @@ class LoginPage extends StatelessWidget {
                   MyButton(
                     buttonText: 'login',
                     onTap: () {
-                      //si el login es satisfactorio navegamos a la pantalla principal
+                      Navigator.pushNamed(context, 'tabs');
                     },
                   ),
                   Container(
@@ -87,11 +87,19 @@ class LoginPage extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.center, // Centra el contenido del Row
                     children: [
                       Text('Need an Account?'),
+                      SizedBox(width: 5), // Espacio entre los textos
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          // Acción cuando se hace tap en Sign Up
+                        },
                         child: Text(
                           'Sign Up',
                           style: TextStyle(

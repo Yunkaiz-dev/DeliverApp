@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:myapp/src/features/common_widgets/back_button.dart';
 import 'package:myapp/src/features/common_widgets/my_button.dart';
@@ -9,7 +10,8 @@ class PasswordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Stack( // Añadir Stack para usar Positioned
+        child: Stack(
+          // Añadir Stack para usar Positioned
           children: [
             Padding(
               padding: const EdgeInsets.all(25.0),
@@ -54,6 +56,69 @@ class PasswordPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:4264880162.
+  void showCustomAlertDialog(
+      BuildContext context,
+      ImageProvider<Object> imagepath,
+      String title,
+      String subtitle,
+      String buttonText,
+      Function buttonFunction) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          content: Column(
+            mainAxisSize:
+                MainAxisSize.min, // Ajusta el tamaño del diálogo a su contenido
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image(
+                image: imagepath,
+                height: 100,
+                width: 100,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                subtitle,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              MyButton(
+                buttonText: buttonText,
+                onTap: () {
+                  buttonFunction(); // Ejecuta la función pasada
+                  Navigator.of(context)
+                      .pop(); // Cierra el diálogo al hacer clic
+                },
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
