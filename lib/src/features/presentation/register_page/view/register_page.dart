@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:myapp/src/features/common_widgets/back_button.dart';
+
+import '../../widgets/back_button.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -42,68 +44,33 @@ class _RegisterPageState extends State<RegisterPage> {
                   SizedBox(
                     height: 30,
                   ),
-                  InputField(
-                    hintTex: 'UserName',
-                    labelText: 'UserName',
-                    passwordChar: false,
-                    prefixIcon: Icons.person,
-                  ),
-                  InputField(
-                    hintTex: 'Email',
-                    labelText: 'Enter your Email',
-                    passwordChar: false,
-                    prefixIcon: Icons.email,
-                    textInputType: TextInputType.emailAddress,
-                  ),
-                  InputField(
-                    hintTex: 'Phone',
-                    labelText: 'Enter your Phone Number',
-                    passwordChar: false,
-                    prefixIcon: Icons.phone,
-                    textInputType: TextInputType.phone,
-                  ),
-                  InputField(
-                    hintTex: 'Date of Birth',
-                    labelText: 'Enter your DOB',
-                    passwordChar: false,
-                    prefixIcon: Icons.calendar_month,
-                    textInputType: TextInputType.datetime,
-                  ),
-                  InputField(
-                    hintTex: 'Password',
-                    labelText: 'Enter a Password',
-                    passwordChar: true,
-                    prefixIcon: Icons.password,
-                    textInputType: TextInputType.visiblePassword,
-                  ),
+                  InputField(hintTex: 'UserName', labelText: 'UserName', passwordChar: false, prefixIcon: Icons.person,),
+                  InputField(hintTex: 'Email', labelText: 'Enter your Email', passwordChar: false, prefixIcon: Icons.email, textInputType: TextInputType.emailAddress,),
+                  InputField(hintTex: 'Phone', labelText: 'Enter your Phone Number', passwordChar: false, prefixIcon: Icons.phone, textInputType: TextInputType.phone,),
+                  InputField(hintTex: 'Date of Birth', labelText: 'Enter your DOB', passwordChar: false, prefixIcon: Icons.calendar_month,textInputType: TextInputType.datetime,),
+                  InputField(hintTex: 'Password', labelText: 'Enter a Password', passwordChar: true, prefixIcon: Icons.password, textInputType: TextInputType.visiblePassword,),
+
                   registerButton(),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  SizedBox(height: 20,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('Already have and account?'),
-                      SizedBox(
-                        width: 10,
-                      ),
+                      SizedBox(width: 10,),
                       GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(context, 'login');
                         },
-                        child: Text(
-                          'Login here',
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.orange),
-                        ),
+                        child: Text('Login here', style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold, color: Colors.orange
+                        ),),
                       )
                     ],
                   )
                 ],
               ),
             ),
+
           ],
         ),
       ),
@@ -111,20 +78,26 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 }
 
-Widget registerButton() {
+
+Widget registerButton(){
   return GestureDetector(
-    onTap: () {},
+    onTap: () {
+
+    },
     child: Container(
       margin: EdgeInsets.only(top: 30),
       width: double.infinity,
       height: 55,
       decoration: BoxDecoration(
-          color: Colors.orange, borderRadius: BorderRadius.circular(12)),
+          color: Colors.orange,
+          borderRadius: BorderRadius.circular(12)),
       child: const Center(
         child: Text(
           'Register',
           style: TextStyle(
-              color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.bold),
         ),
       ),
     ),
@@ -132,19 +105,14 @@ Widget registerButton() {
 }
 
 class InputField extends StatelessWidget {
-  InputField(
-      {super.key,
-      required this.hintTex,
-      required this.labelText,
-      required this.passwordChar,
-      this.textInputType,
-      required this.prefixIcon});
+  InputField({super.key, required this.hintTex, required this.labelText, required this.passwordChar, this.textInputType, required this.prefixIcon});
 
   final String hintTex;
   final String labelText;
   final bool passwordChar;
   final TextInputType? textInputType;
   final IconData prefixIcon;
+
 
   @override
   Widget build(BuildContext context) {
@@ -154,10 +122,7 @@ class InputField extends StatelessWidget {
         keyboardType: textInputType,
         obscureText: passwordChar,
         decoration: InputDecoration(
-          prefixIcon: Icon(
-            prefixIcon,
-            color: Colors.orange,
-          ),
+          prefixIcon: Icon(prefixIcon, color: Colors.orange,),
           hintText: hintTex,
           labelText: labelText,
           labelStyle: TextStyle(color: Colors.orange),
@@ -165,7 +130,8 @@ class InputField extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide(
                 color: Colors.orange,
-              )),
+              )
+          ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(
@@ -178,14 +144,13 @@ class InputField extends StatelessWidget {
   }
 }
 
-Widget emailInput() {
+
+
+Widget emailInput(){
   return TextFormField(
     keyboardType: TextInputType.emailAddress,
     decoration: InputDecoration(
-      prefixIcon: Icon(
-        Icons.email_outlined,
-        color: Colors.orange,
-      ),
+      prefixIcon: Icon(Icons.email_outlined, color: Colors.orange,),
       hintText: 'user@email.com',
       labelText: 'Enter your email',
       labelStyle: TextStyle(color: Colors.orange),
@@ -193,7 +158,8 @@ Widget emailInput() {
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(
             color: Colors.orange,
-          )),
+          )
+      ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
         borderSide: BorderSide(
@@ -204,14 +170,11 @@ Widget emailInput() {
   );
 }
 
-Widget passwordInput() {
+Widget passwordInput(){
   return TextFormField(
     obscureText: true,
     decoration: InputDecoration(
-      prefixIcon: Icon(
-        Icons.password,
-        color: Colors.orange,
-      ),
+      prefixIcon: Icon(Icons.password, color: Colors.orange,),
       hintText: 'your password',
       labelText: 'Enter your password',
       labelStyle: TextStyle(color: Colors.orange),
@@ -219,7 +182,8 @@ Widget passwordInput() {
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(
             color: Colors.orange,
-          )),
+          )
+      ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
         borderSide: BorderSide(
@@ -229,3 +193,7 @@ Widget passwordInput() {
     ),
   );
 }
+
+
+
+

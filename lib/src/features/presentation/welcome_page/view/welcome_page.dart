@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -10,14 +11,16 @@ class WelcomePage extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/images/welcome.png'),
-                    fit: BoxFit.cover)),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/images/welcome.jpeg'),
+              ),
+            ),
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
               child: Container(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withOpacity(0.3),
               ),
             ),
           ),
@@ -25,30 +28,28 @@ class WelcomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: EdgeInsets.only(left: 20),
-                child: Text(
+                padding: const EdgeInsets.only(left: 20),
+                child: const Text(
                   'DELIVERED FAST FOOD TO YOUR DOOR',
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 45,
-                      fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 45),
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(left: 20, top: 20),
-                // ignore: prefer_const_constructors
-                child: Text(
-                  'set exact location to find the righ restaurant',
+                padding: const EdgeInsets.only(left: 20, top: 20),
+                child: const Text(
+                  'Set exact location to find the right restaurants near you.',
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 17),
                 ),
               ),
               GestureDetector(
                 onTap: () {
-                  //navegar al login page
-                  Navigator.pushNamed(context, 'login');
+                  Navigator.of(context).pushNamed('login');
                 },
                 child: Container(
                   margin: EdgeInsets.only(top: 30),
@@ -57,24 +58,21 @@ class WelcomePage extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.orange,
                       borderRadius: BorderRadius.circular(30)),
-                  child: Center(
+                  child: const Center(
                     child: Text(
-                      'login',
+                      'Login',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 20,
+                          fontSize: 17,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
               ),
-//-------------------------------------------------------
               GestureDetector(
-                onTap: () {
-                  //navegar al login page
-                },
+                onTap: () {},
                 child: Container(
-                  margin: EdgeInsets.only(top: 30),
+                  margin: EdgeInsets.only(top: 20),
                   width: 350,
                   height: 45,
                   decoration: BoxDecoration(
@@ -84,15 +82,18 @@ class WelcomePage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.facebook, color: Colors.white),
+                        Icon(
+                          Icons.facebook,
+                          color: Colors.white,
+                        ),
                         SizedBox(
-                          width: 10,
+                          width: 20,
                         ),
                         Text(
-                          'login with facebook',
+                          'Login with Facebook',
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 20,
+                              fontSize: 17,
                               fontWeight: FontWeight.bold),
                         ),
                       ],

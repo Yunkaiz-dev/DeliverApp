@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:myapp/src/features/common_widgets/back_button.dart';
-import 'package:myapp/src/features/common_widgets/my_button.dart';
-import 'package:myapp/src/features/presentation/password_page/view/password_page.dart';
+import 'package:myapp/src/features/presentation/widgets/my_button.dart';
+import '../../widgets/back_button.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  @override
   Widget build(BuildContext context) {
+    // SystemChrome.setSystemUIOverlayStyle(
+    //   SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.white),
+    // );
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -16,15 +23,17 @@ class LoginPage extends StatelessWidget {
             Stack(
               children: [
                 Image.asset(
-                  'assets/images/imagen.png',
+                  'assets/images/login_banner.jpeg',
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.40,
                   fit: BoxFit.cover,
                 ),
                 Positioned(
-                    top: 40,
-                    left: 40,
-                    child: backButton(context, Colors.white)),
+                  top: 40,
+                  child: Container(
+                    child: backButton(context, Colors.white),
+                  ),
+                ),
               ],
             ),
             Padding(
@@ -37,78 +46,62 @@ class LoginPage extends StatelessWidget {
                   Text(
                     'Welcome Back',
                     style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black54),
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  Text('login into your account'),
+                  Text('Login into your account'),
                   SizedBox(
-                    height: 20,
+                    height: 30,
                   ),
-                  emailinput(),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  passwordinput(),
+                  emailInput(),
                   SizedBox(
                     height: 15,
                   ),
-                  MyButton(
-                    buttonText: 'login',
+                  passwordInput(),
+                  GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, 'tabs');
+                      Navigator.of(context).pushNamed('forgot-password');
                     },
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PasswordPage()));
-                      },
-                      child: Text(
-                        'Forgot your password?',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue,
-                          decoration:
-                              TextDecoration.underline, // Subrayado azul
-                        ),
-                      ),
+                    child: Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      alignment: Alignment.centerRight,
+                      child: Text('Forgot your password?'),
                     ),
                   ),
-                  SizedBox(
-                    height: 20,
+                  MyButton(
+                    buttonText: 'Login',
+                    onTap: () {
+                      //temporalmente navegamos a la pagina de Tap
+                      Navigator.pushNamed(context, 'tabs');
+                      //navegamos si nos logueamos correctamente
+                    },
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.center, // Centra el contenido del Row
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Need an Account?'),
-                      SizedBox(width: 5), // Espacio entre los textos
+                      Text('Need and account?'),
+                      SizedBox(
+                        width: 10,
+                      ),
                       GestureDetector(
                         onTap: () {
-                          // Acción cuando se hace tap en Sign Up
+                          Navigator.of(context).pushNamed('register');
                         },
                         child: Text(
-                          'Sign Up',
+                          'Register here',
                           style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.orange,
-                          ),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.orange),
                         ),
-                      ),
+                      )
                     ],
                   )
                 ],
@@ -119,52 +112,83 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
-
-  TextFormField emailinput() {
-    return TextFormField(
-      keyboardType: TextInputType.emailAddress,
-      decoration: InputDecoration(
-        prefixIcon: Icon(
-          Icons.email_outlined,
-          color: Colors.orange,
-        ),
-        hintText: 'user@gmail.com',
-        labelText: 'Enter your Email',
-        labelStyle: TextStyle(color: Colors.orange),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.orange,
-          ),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.orange),
-        ),
-      ),
-    );
-  }
 }
 
-TextFormField passwordinput() {
+Widget emailInput() {
   return TextFormField(
-    obscureText: true,
+    keyboardType: TextInputType.emailAddress,
     decoration: InputDecoration(
       prefixIcon: Icon(
-        Icons.password_outlined,
+        Icons.email_outlined,
         color: Colors.orange,
       ),
-      hintText: 'Enter your password',
-      labelText: 'Enter your password',
+      hintText: 'user@email.com',
+      labelText: 'Enter your email',
       labelStyle: TextStyle(color: Colors.orange),
       focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: Colors.orange,
+          )),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
         borderSide: BorderSide(
           color: Colors.orange,
         ),
       ),
+    ),
+  );
+}
+
+Widget passwordInput() {
+  return TextFormField(
+    obscureText: true,
+    decoration: InputDecoration(
+      prefixIcon: Icon(
+        Icons.password,
+        color: Colors.orange,
+      ),
+      hintText: 'your password',
+      labelText: 'Enter your password',
+      labelStyle: TextStyle(color: Colors.orange),
+      focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: Colors.orange,
+          )),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: Colors.orange),
+        borderSide: BorderSide(
+          color: Colors.orange,
+        ),
       ),
     ),
   );
 }
+
+// Widget loginButton(BuildContext context){
+//   return GestureDetector(
+//     onTap: () {
+//       //temporalmente navegamos a la pagina de Tap
+//       Navigator.pushNamed(context, 'tabs');
+//       //navegamos si nos logueamos correctamente
+//     },
+//     child: Container(
+//       margin: EdgeInsets.only(top: 30),
+//       width: double.infinity,
+//       height: 55,
+//       decoration: BoxDecoration(
+//           color: Colors.orange,
+//           borderRadius: BorderRadius.circular(12)),
+//       child: const Center(
+//         child: Text(
+//           'Login',
+//           style: TextStyle(
+//               color: Colors.white,
+//               fontSize: 17,
+//               fontWeight: FontWeight.bold),
+//         ),
+//       ),
+//     ),
+//   );
+// }
