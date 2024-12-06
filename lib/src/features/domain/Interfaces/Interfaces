@@ -1,0 +1,12 @@
+//Auth Repositories
+import 'package:myapp/src/features/data/Repositories/Auth/signup_repository.dart';
+import 'package:myapp/src/api_services/app_error.dart';
+import 'package:myapp/src/services/auth_firebase_services/decodables/signup_decodable.dart';
+import 'package:myapp/src/utils/helpers/result_type.dart';
+import 'package:myapp/src/features/data/Repositories/Auth/signup_repository_parameters.dart';
+
+abstract class SignUpRepository {
+  Future<Result<SignUpDecodable, Failure>> signUp({required SignUpRepositoryParameters parameters});
+}
+
+
